@@ -4,7 +4,11 @@ public class Main
 {
     private static DynamicDNS DuckDNS=new DynamicDNS();
 
-    public static void main(String[]args) throws Exception
+    /**
+     * This is the main method.
+     * @param args Command line parameter.
+     */
+    public static void main(String[]args)
     {
         boolean loaded=DuckDNS.Load();
         if(!loaded)

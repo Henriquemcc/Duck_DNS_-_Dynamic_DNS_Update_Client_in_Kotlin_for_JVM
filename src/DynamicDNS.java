@@ -11,26 +11,46 @@ class DynamicDNS
     private String domain;
     private String token;
 
+    /**
+     * This method returns the value of the domain String.
+     * @return Value of the domain String.
+     */
     public String getDomain()
     {
         return this.domain;
     }
 
+    /**
+     * This method returns the value of the token String.
+     * @return Value of the token String.
+     */
     public String getToken()
     {
         return this.token;
     }
 
+    /**
+     * This method sets the value for the string subdomain.
+     * @param domain New value for domain String.
+     */
     public void setDomain(String domain)
     {
         this.domain=domain.toLowerCase();
     }
 
+    /**
+     * This method sets the value for the String token.
+     * @param token New value for token String.
+     */
     public void setToken(String token)
     {
         this.token=token;
     }
 
+    /**
+     * This method updates Duck DNS Domain booth IPv4 and IPv6 addresses.
+     * @return Byte that indicates whether it was successful to update IPv6 & IPv4 (10), IPv6 only (6), IPv4 only (4) or none (0).
+     */
     public byte update()
     {
         byte success=0;
@@ -42,6 +62,10 @@ class DynamicDNS
         return success;
     }
 
+    /**
+     * This method updates the Duck DNS Domain IPv6 address.
+     * @return Boolean value whether it was successful to update IPv6.
+     */
     public boolean updateIPv6()
     {
         boolean success=false;
@@ -75,6 +99,10 @@ class DynamicDNS
         return success;
     }
 
+    /**
+     * This method updates the Duck DNS Domain IPv4 address.
+     * @return Boolean value whether it was successful to update IPv4.
+     */
     public boolean updateIPv4()
     {
         boolean success=false;
@@ -102,6 +130,11 @@ class DynamicDNS
         return success;
     }
 
+    /**
+     * This method retrieves and returns the IPv6 Address of the machine.
+     * @return String containing the IPv6 address of the machine
+     * @throws SocketException if an I/O error occurs in the method getNetworkInterfaces() from the class NetworkInterface, or if the platform does not have at least one configured network interface.
+     */
     private String getIPv6() throws SocketException
     {
         String IPv6=null;
@@ -117,7 +150,15 @@ class DynamicDNS
                     if((!inetAddress.isMulticastAddress()) && (!inetAddress.isLinkLocalAddress()) && (!inetAddress.isSiteLocalAddress()) && (!inetAddress.isLoopbackAddress()))
                     {
                         IPv6=inetAddress.getCanonicalHostName();
-                        IPv6=IPv6.substring(0, IPv6.indexOf("%"));
+                        try
+                        {
+                            IPv6=IPv6.substring(0, IPv6.indexOf("%"));
+                        }
+                        catch (IndexOutOfBoundsException e)
+                        {
+                            e.printStackTrace();
+                        }
+
                     }
                 }
 
@@ -126,16 +167,20 @@ class DynamicDNS
         return IPv6;
     }
 
+    /**
+     * This method loads the configuration file.
+     * @return Boolean value whether it was successful to load configuration file.
+     */
     public boolean Load()
     {
         boolean success=false;
-        File settingsFile=new File(FILENAME);
+        File configurationFile=new File(FILENAME);
 
-        if(settingsFile.exists() && settingsFile.canRead())
+        if(configurationFile.exists() && configurationFile.canRead())
         {
             try
             {
-                Scanner dataFile=new Scanner(settingsFile);
+                Scanner dataFile=new Scanner(configurationFile);
                 domain=dataFile.nextLine();
                 token=dataFile.nextLine();
                 dataFile.close();
@@ -149,26 +194,30 @@ class DynamicDNS
         return success;
     }
 
+    /**
+     * This method saves the configuration to the configuration file.
+     * @return Boolean value whether it was successful to save configuration file.
+     */
     public boolean Save()
     {
         boolean success=false;
-        File settingsFile=new File(FILENAME);
+        File configurationFile=new File(FILENAME);
 
-        if(!settingsFile.exists())
+        if(!configurationFile.exists())
             try
             {
-                settingsFile.createNewFile();
+                configurationFile.createNewFile();
             }
             catch(IOException e)
             {
                 e.printStackTrace();
             }
 
-        if(settingsFile.canWrite())
+        if(configurationFile.canWrite())
         {
             try
             {
-                Formatter dataFile=new Formatter(settingsFile, "UTF-8");
+                Formatter dataFile=new Formatter(configurationFile, "UTF-8");
                 dataFile.format("%s\n", domain);
                 dataFile.format("%s\n", token);
                 dataFile.close();
