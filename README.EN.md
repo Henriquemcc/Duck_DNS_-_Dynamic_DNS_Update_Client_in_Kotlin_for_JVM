@@ -78,7 +78,7 @@ crontab -e
 and copy the following text to the last line:
 
 ```
-*/5 * * * * cd ~/duckdns/ && java -jar ~/duckdns/<.jar_Binary_Name> >~/duckdns/duck.log
+*/5 * * * * cd ~/duckdns/ && java -jar ./<.jar_Binary_Name> > ./duck.log
 ```
 
 in which '<.jar_Binary_Name>' is replaced by the name of the file which was downloaded.
