@@ -11,23 +11,27 @@ class DynamicDNS
     private String domain;
     private String token;
 
-    /**
-     * This method returns the value of the domain String.
-     * @return Value of the domain String.
-     */
-    public String getDomain()
-    {
-        return this.domain;
-    }
+// --Commented out by Inspection START (24/05/2020 14:09):
+//    /**
+//     * This method returns the value of the domain String.
+//     * @return Value of the domain String.
+//     */
+//    public String getDomain()
+//    {
+//        return this.domain;
+//    }
+// --Commented out by Inspection STOP (24/05/2020 14:09)
 
-    /**
-     * This method returns the value of the token String.
-     * @return Value of the token String.
-     */
-    public String getToken()
-    {
-        return this.token;
-    }
+// --Commented out by Inspection START (24/05/2020 14:11):
+//    /**
+//     * This method returns the value of the token String.
+//     * @return Value of the token String.
+//     */
+//    public String getToken()
+//    {
+//        return this.token;
+//    }
+// --Commented out by Inspection STOP (24/05/2020 14:11)
 
     /**
      * This method sets the value for the string subdomain.
@@ -84,14 +88,6 @@ class DynamicDNS
 
 
         }
-        catch(SocketException e)
-        {
-            e.printStackTrace();
-        }
-        catch(MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
         catch(IOException e)
         {
             e.printStackTrace();
@@ -117,12 +113,7 @@ class DynamicDNS
             sb.append(br.readLine());
             if(sb.toString().equals("OK"))
                 success=true;
-        }
-        catch(MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
-        catch(IOException e)
+        } catch(IOException e)
         {
             e.printStackTrace();
         }
@@ -139,7 +130,7 @@ class DynamicDNS
     {
         String IPv6=null;
         Enumeration <NetworkInterface> networkInterfaces=NetworkInterface.getNetworkInterfaces();
-        while(((Enumeration) networkInterfaces).hasMoreElements() && IPv6==null)
+        while(networkInterfaces.hasMoreElements() && IPv6==null)
         {
             Enumeration<InetAddress> inetAddresses=networkInterfaces.nextElement().getInetAddresses();
             while(inetAddresses.hasMoreElements() && IPv6==null)
@@ -152,7 +143,8 @@ class DynamicDNS
                         IPv6=inetAddress.getCanonicalHostName();
                         try
                         {
-                            IPv6=IPv6.substring(0, IPv6.indexOf("%"));
+                            if(IPv6!=null && IPv6.contains("%"))
+                                IPv6=IPv6.substring(0, IPv6.indexOf("%"));
                         }
                         catch (IndexOutOfBoundsException e)
                         {
@@ -196,11 +188,9 @@ class DynamicDNS
 
     /**
      * This method saves the configuration to the configuration file.
-     * @return Boolean value whether it was successful to save configuration file.
      */
-    public boolean Save()
+    public void Save()
     {
-        boolean success=false;
         File configurationFile=new File(FILENAME);
 
         if(!configurationFile.exists())
@@ -221,17 +211,11 @@ class DynamicDNS
                 dataFile.format("%s\n", domain);
                 dataFile.format("%s\n", token);
                 dataFile.close();
-                success=true;
             }
-            catch(FileNotFoundException e)
-            {
-                e.printStackTrace();
-            }
-            catch(UnsupportedEncodingException e)
+            catch(FileNotFoundException | UnsupportedEncodingException e)
             {
                 e.printStackTrace();
             }
         }
-        return success;
     }
 }

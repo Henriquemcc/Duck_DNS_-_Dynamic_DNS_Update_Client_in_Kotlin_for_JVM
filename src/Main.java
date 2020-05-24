@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main
 {
-    private static DynamicDNS DuckDNS=new DynamicDNS();
+    private static final DynamicDNS DuckDNS=new DynamicDNS();
 
     /**
      * This is the main method.
