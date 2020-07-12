@@ -99,7 +99,7 @@ To run this program is required to have a Operating System with Linux Kernel wit
 
 ## License
 
-This program is licensed under the [GNU General Public License v3.0](LICENSE).
+This program is licensed under the [MIT License](LICENSE).
 
 ## Documentation
 

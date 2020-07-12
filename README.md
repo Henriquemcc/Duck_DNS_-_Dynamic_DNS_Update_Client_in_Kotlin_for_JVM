@@ -98,7 +98,7 @@ Para que este programa rode é necessário estar rodando um Sistema Operacional 
 
 ## Licença
 
-Este programa está licenciado sobre a [GNU General Public License v3.0](LICENSE).
+Este programa está licenciado sobre a [Licença MIT](LICENSE).
 
 ## Documentação
 
