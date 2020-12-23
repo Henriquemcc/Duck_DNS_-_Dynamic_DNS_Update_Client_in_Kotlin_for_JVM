@@ -1,5 +1,7 @@
 [English Version](README.EN.md)
+
 # DuckDNS para Linux em Java
+
 Este programa serve para executar o Duck DNS no Linux utilizando IPv6 e IPv4 em dual stack de forma automática.
 
 ## Instalação
@@ -17,9 +19,11 @@ cd duckdns
 
 ### 2- Baixando o executável na pasta
 
-Baixe o executável .jar do programa da página das [releases](https://github.com/Henriquemcc/Duck_DNS_Java/releases) nesta pasta.
+Baixe o executável .jar do programa da página das [releases](https://github.com/Henriquemcc/Duck_DNS_Java/releases)
+nesta pasta.
 
-Depois que baixado será necesário tornar o binário como executável. Para isto, digite o seguinte comando no terminal (dentro da pasta):
+Depois que baixado será necesário tornar o binário como executável. Para isto, digite o seguinte comando no terminal (
+dentro da pasta):
 
 ```
 chmod 700 <Nome_do_.jar>
@@ -30,12 +34,15 @@ em que '<Nome_do_.jar>' é substituído pelo nome do arquivo que foi baixado.
 ### 3- Configurando o Duck DNS
 
 Nesta pasta, abra o terminal e digite o seguinte comando:
+
 ```
 java -jar <Nome_do_.jar>
 ```
+
 em que '<Nome_do_.jar>' é substituído pelo nome do arquivo que foi baixado.
 
 O programa pedira para que informe o Subdomínio e o Token:
+
 ```
 File Not Loaded
 Please, type:
@@ -52,7 +59,8 @@ exemplo
 
 #### Subdomínio Duck DNS
 
-Se o domínio que foi registrado for: exemplo.duckdns.org, então você deve colocar apenas 'exemplo' (sem aspas) como seu subdomínio.
+Se o domínio que foi registrado for: exemplo.duckdns.org, então você deve colocar apenas 'exemplo' (sem aspas) como seu
+subdomínio.
 
 #### Token do Duck DNS
 
@@ -84,7 +92,8 @@ em que '<Nome_do_.jar>' é substituído pelo nome do arquivo que foi baixado.
 
 ### 6- Teste
 
-Para testar se o programa está funcionando, digite o seguinte comando no terminal dentro da pasta onde o binário foi instalado:
+Para testar se o programa está funcionando, digite o seguinte comando no terminal dentro da pasta onde o binário foi
+instalado:
 
 ```
 java -jar <Nome_do_.jar>
@@ -94,7 +103,8 @@ em que '<Nome_do_.jar>' é substituído pelo nome do arquivo que foi baixado.
 
 ## Pré-requisitos
 
-Para que este programa rode é necessário estar rodando um Sistema Operacional com o Kernel Linux e com o openjdk 8 jre e o Crontab instalados.
+Para que este programa rode é necessário estar rodando um Sistema Operacional com o Kernel Linux e com o openjdk 8 jre e
+o Crontab instalados.
 
 ## Licença
 
