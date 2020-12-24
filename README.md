@@ -1,6 +1,6 @@
 [English Version](README.EN.md)
 
-# DuckDNS para Linux em Java
+# DuckDNS para Linux em Kotlin/JVM
 
 Este programa serve para executar o Duck DNS no Linux utilizando IPv6 e IPv4 em dual stack de forma automática.
 
@@ -19,11 +19,10 @@ cd duckdns
 
 ### 2- Baixando o executável na pasta
 
-Baixe o executável .jar do programa da página das [releases](https://github.com/Henriquemcc/Duck_DNS_Java/releases)
+Baixe o executável .jar do programa da página das [releases](https://github.com/Henriquemcc/Duck_DNS_Kotlin_JVM/releases)
 nesta pasta.
 
-Depois que baixado será necesário tornar o binário como executável. Para isto, digite o seguinte comando no terminal (
-dentro da pasta):
+Depois que baixado será necessário tornar o binário como executável. Para isto, digite o seguinte comando no terminal (dentro da pasta):
 
 ```
 chmod 700 <Nome_do_.jar>
@@ -59,7 +58,7 @@ exemplo
 
 #### Subdomínio Duck DNS
 
-Se o domínio que foi registrado for: exemplo.duckdns.org, então você deve colocar apenas 'exemplo' (sem aspas) como seu
+Se o domínio que foi registrado for: exemplo.duckdns.org, então deve colocar apenas 'exemplo' (sem aspas) como
 subdomínio.
 
 #### Token do Duck DNS
@@ -68,7 +67,7 @@ Uma vez logado no site do Duck DNS, o seu token estará listado na [home page do
 
 ### 4- Adicionando o programa ao crontab
 
-Para verificar se seu sistema operacional com kernel Linux possuí crontab, digite o seguinte comando no terminal:
+Para verificar se o seu sistema operacional com kernel Linux possuí crontab, digite o seguinte comando no terminal:
 
 ```
 ps -ef | grep cr[o]n
@@ -109,10 +108,6 @@ o Crontab instalados.
 ## Licença
 
 Este programa está licenciado sobre a [Licença MIT](LICENSE).
-
-## Documentação
-
-A documentação está disponível em [html](./JavaDoc.zip).
 
 ## Dúvidas Frequentes
 

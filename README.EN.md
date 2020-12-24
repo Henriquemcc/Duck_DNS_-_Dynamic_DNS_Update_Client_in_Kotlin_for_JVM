@@ -1,6 +1,6 @@
 [Versão em Português](README.md)
 
-# DuckDNS for Linux in Java
+# DuckDNS for Linux in Kotlin/JVM
 
 This program is aimed to run Duck DNS on Linux with IPv6 and IPv4 in dual stack automatically.
 
@@ -19,10 +19,11 @@ cd duckdns
 
 ### 2- Downloading the program binary on the folder
 
-Download the program binary from the page [releases](https://github.com/Henriquemcc/Duck_DNS_Java/releases) on this
+Download the program binary from the page [releases](https://github.com/Henriquemcc/Duck_DNS_Kotlin_JVM/releases) on this
 folder.
 
-After downloaded you will have to make the binary runnable. For it, type the following command on the terminal (inside
+After downloaded the binary, you will have to make it runnable. For it, type the following command on the 
+terminal (inside
 the folder):
 
 ```
@@ -82,7 +83,7 @@ Having corontab installed, type the following command:
 crontab -e
 ```
 
-and copy the following text to the last line:
+and then copy the following text to the last line:
 
 ```
 */5 * * * * cd ~/duckdns/ && java -jar ./<.jar_Binary_Name> > ./duck.log
@@ -103,12 +104,8 @@ in which '<.jar_Binary_Name>' is replaced by the name of the file which was down
 
 ## System requirements
 
-To run this program is required to have a Operating System with Linux Kernel with openjdk 8 jre and Crontab installed.
+To run this program is required to have an Operating System with Linux Kernel with openjdk 8 jre and Crontab installed.
 
 ## License
 
 This program is licensed under the [MIT License](LICENSE).
-
-## Documentation
-
-The documentation is available in [html](./JavaDoc.zip).
