@@ -107,7 +107,7 @@ o Crontab instalados.
 
 ## Licença
 
-Este programa está licenciado sobre a [Licença MIT](LICENSE).
+Este programa está licenciado sobre a [European Union Public License 1.2](LICENSE).
 
 ## Dúvidas Frequentes
 

@@ -83,7 +83,7 @@ Having corontab installed, type the following command:
 crontab -e
 ```
 
-and then copy the following text to the last line:
+then copy the following text to the last line:
 
 ```
 */5 * * * * cd ~/duckdns/ && java -jar ./<.jar_Binary_Name> > ./duck.log
@@ -108,4 +108,4 @@ To run this program is required to have an Operating System with Linux Kernel wi
 
 ## License
 
-This program is licensed under the [MIT License](LICENSE).
+This program is licensed under the [European Union Public License 1.2](LICENSE).
