@@ -1,35 +1,41 @@
-private val DuckDNS = DynamicDNS()
+import console.console
+import console.quickSetupConsole
+import controller.SerializableSubdomainController
+import java.awt.GraphicsEnvironment
+import java.io.FileNotFoundException
+import java.io.IOException
 
 /**
- * This is the main method.
- * @param args Command line parameter.
+ * Subdomain object controller
+ */
+var serializableSubdomainController: SerializableSubdomainController? = null
+
+/**
+ * Chooses what interface will be used for communicating to the user
  */
 fun main(args: Array<String>) {
-    var enableIPv6 = true
-    var enableIPv4 = true
 
-    when {
-        "--IPv6-only" in args -> {
-            enableIPv6 = true
-            enableIPv4 = false
+    if (serializableSubdomainController == null)
+        try {
+            serializableSubdomainController = SerializableSubdomainController(true)
+        } catch (e: FileNotFoundException) {
+            serializableSubdomainController = SerializableSubdomainController()
+            serializableSubdomainController?.saveSubdomains()
+
+            if (GraphicsEnvironment.isHeadless()) quickSetupConsole()
+            else TODO("Not yet implemented")
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
 
-        "--IPv4-only" in args -> {
-            enableIPv6 = false
-            enableIPv4 = true
-        }
-    }
-
-    val loaded = DuckDNS.load()
-    if (!loaded) {
-        println("File Not Loaded")
-        println("Please, type:")
-        print("Subdomain: ")
-        DuckDNS.setDomain((readLine() ?: return).trim())
-        print("Token: ")
-        DuckDNS.setToken((readLine() ?: return).trim())
-        DuckDNS.save()
-    }
-    DuckDNS.update(enableIPv6, enableIPv4)
-
+    if (args.isNotEmpty() && args.contains("console"))
+        console()
+    else if (GraphicsEnvironment.isHeadless())
+        console()
+    else if (args.isNotEmpty() && args.contains("gui"))
+        TODO("Not yet implemented")
+    else
+        serializableSubdomainController?.run()
 }
