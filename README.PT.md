@@ -1,8 +1,11 @@
 [English Version](README.EN.md)
 
-# Atualizador do endereço IP do subdomínio DuckDNS em Kotlin/JVM
+# Atualizador de endereço IP do subdomínio do DuckDNS em Kotlin/JVM
 
-Este programa serve para executar o Duck DNS no Linux utilizando IPv6 e IPv4 em dual stack de forma automática.
+[![](https://www.duckdns.org/img/ducky_icon.png)](https://www.duckdns.org)
+
+Este programa atualiza o endereço IP (IPv4 e IPv6) dos subdomínios do [Duck DNS](https://www.duckdns.org), que é um
+serviço de DNS dinâmico gratuito.
 
 ## Licença
 
