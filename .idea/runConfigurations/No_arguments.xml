@@ -1,8 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Help Menu" type="JetRunConfigurationType">
+  <configuration default="false" name="No arguments" type="JetRunConfigurationType">
     <option name="MAIN_CLASS_NAME" value="MainKt" />
     <module name="Duck DNS" />
-    <option name="PROGRAM_PARAMETERS" value="--help" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

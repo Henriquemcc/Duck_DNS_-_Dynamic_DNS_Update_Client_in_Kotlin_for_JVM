@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Duck DNS:jar">
+  <artifact type="jar" build-on-make="true" name="Duck DNS:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Duck_DNS_jar</output-path>
     <root id="archive" name="Duck DNS.jar">
       <element id="module-output" name="Duck DNS" />
