@@ -1,12 +1,8 @@
 package console.subdomain
 
-import console.getConfirmation
-import console.readInteger
-import console.readString
-import serializableSubdomainController
 
 /**
- * Get subdomain name, checking if it's subdomain name is in the subdomains array
+ * Get subdomain name, checking if it's subdomain name is in the subdomains array.
  * @param instructionMessage Instruction message to print.
  */
 fun getSubDomainName(instructionMessage: String? = "Subdomain name:\n> "): String {
@@ -14,8 +10,8 @@ fun getSubDomainName(instructionMessage: String? = "Subdomain name:\n> "): Strin
     var searchAgain = false
 
     do {
-        subdomainName = readString(instructionMessage)
-        val subdomainFounded = serializableSubdomainController?.subdomains?.any { it.subdomainName.equals(subdomainName, ignoreCase = true) } == true
+        subdomainName = console.readString(instructionMessage)
+        val subdomainFounded = controller.getSubdomains().any { it.subdomainName.equals(subdomainName, ignoreCase = true) }
 
         if (!subdomainFounded) {
             val subdomainNotFoundedInstructionMessage = StringBuilder()
@@ -24,7 +20,8 @@ fun getSubDomainName(instructionMessage: String? = "Subdomain name:\n> "): Strin
             subdomainNotFoundedInstructionMessage.appendLine("Y - Yes")
             subdomainNotFoundedInstructionMessage.appendLine("N - No")
             subdomainNotFoundedInstructionMessage.append("> ")
-            searchAgain = getConfirmation(subdomainNotFoundedInstructionMessage.toString())
+            searchAgain = console.getConfirmation(subdomainNotFoundedInstructionMessage.toString())
+            subdomainName = ""
         }
     } while (searchAgain)
 
@@ -36,6 +33,6 @@ fun getSubDomainName(instructionMessage: String? = "Subdomain name:\n> "): Strin
  * @param instructionMessage Instruction message to print.
  * @return Valid integer number.
  */
-fun getSubDomainPosition(instructionMessage: String? = "Subdomain position [0, ${serializableSubdomainController?.subdomains?.size?.minus(1) ?: -1}]:\n> "): Int {
-    return readInteger(instructionMessage.toString(), serializableSubdomainController?.subdomains?.size?.let { IntRange(0, it) })
+fun getSubDomainPosition(instructionMessage: String? = "Subdomain position [0, ${controller.getSubdomains().size - 1}]:\n> "): Int {
+    return console.readInteger(instructionMessage.toString(), IntRange(0, controller.getSubdomains().size))
 }

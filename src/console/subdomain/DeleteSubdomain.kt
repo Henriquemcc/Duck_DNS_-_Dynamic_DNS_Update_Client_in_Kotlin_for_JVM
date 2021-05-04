@@ -1,10 +1,6 @@
 package console.subdomain
 
-import console.getConfirmation
-import console.printHeader
-import console.readInteger
 import model.Subdomain
-import serializableSubdomainController
 
 /**
  * Menu that helps console user to delete a Duck DNS Subdomain Object.
@@ -23,8 +19,8 @@ fun deleteSubdomain() {
     instructionMessage.append("> ")
 
     while (command != 0) {
-        printHeader("Subdomain deletion menu")
-        command = readInteger(instructionMessage.toString(), 0..4)
+        console.printHeader("Subdomain deletion menu")
+        command = console.readInteger(instructionMessage.toString(), 0..4)
         println()
 
         when (command) {
@@ -42,10 +38,11 @@ fun deleteSubdomain() {
  */
 private fun deleteByPosition() {
 
-    printHeader("Subdomain delete by position menu")
+    console.printHeader("Subdomain delete by position menu")
     val position = getSubDomainPosition()
-    val subdomain = serializableSubdomainController?.subdomains?.get(position)
-    subdomain?.let { delete(it) }
+    val subdomain = controller.getSubdomains()[position]
+    delete(subdomain)
+
 
 }
 
@@ -62,11 +59,11 @@ private fun delete(subdomain: Subdomain) {
     deleteConfirmationMessage.appendLine("N - No")
     deleteConfirmationMessage.append("> ")
 
-    val confirmation = getConfirmation(deleteConfirmationMessage.toString())
+    val confirmation = console.getConfirmation(deleteConfirmationMessage.toString())
     println()
 
     if (confirmation)
-        serializableSubdomainController?.subdomains?.remove(subdomain)
+        controller.remove(subdomain)
 }
 
 /**
@@ -74,9 +71,14 @@ private fun delete(subdomain: Subdomain) {
  */
 private fun deleteByName() {
 
-    printHeader("Subdomain delete by name menu")
+    console.printHeader("Subdomain delete by name menu")
     val subdomainName = getSubDomainName()
-    val subDomain = serializableSubdomainController?.subdomains?.find { it.subdomainName.equals(subdomainName, ignoreCase = true) }
+    val subDomain = controller.getSubdomains().find {
+        it.subdomainName.equals(
+            subdomainName,
+            ignoreCase = true
+        )
+    }
     subDomain?.let { delete(it) }
 }
 
@@ -85,15 +87,15 @@ private fun deleteByName() {
  */
 private fun deleteAll() {
 
-    printHeader("Subdomain delete all menu")
+    console.printHeader("Subdomain delete all menu")
     val deleteInstructionMessage = StringBuilder()
     deleteInstructionMessage.appendLine("Are you sure you want to delete all Duck DNS Subdomains?")
     deleteInstructionMessage.appendLine("Y - Yes")
     deleteInstructionMessage.appendLine("N - No")
     deleteInstructionMessage.append("> ")
-    val confirmation = getConfirmation(deleteInstructionMessage.toString())
+    val confirmation = console.getConfirmation(deleteInstructionMessage.toString())
     println()
 
     if (confirmation)
-        serializableSubdomainController?.subdomains?.clear()
+        controller.getSubdomains().clear()
 }

@@ -1,11 +1,7 @@
 package console.subdomain
 
-import console.printHeader
-import console.readInteger
-import console.readString
 import exception.ObjectAlreadyExistsException
 import model.Subdomain
-import serializableSubdomainController
 import java.util.*
 
 /**
@@ -23,14 +19,16 @@ fun createSubdomain() {
     }
 
     while (command != 0) {
-        printHeader("Subdomain creation menu")
+        console.printHeader("Subdomain creation menu")
         val instructionMessage = StringBuilder()
         instructionMessage.appendLine("Options:")
         instructionMessage.appendLine("0 - Exit")
         instructionMessage.appendLine("1 - Save and exit")
 
         instructionMessage.append("2 - Subdomain Name = ")
-        if (duckDNSNewSubdomainData.subdomainName == null) instructionMessage.appendLine("${duckDNSNewSubdomainData.subdomainName}")
+        if (duckDNSNewSubdomainData.subdomainName == null) instructionMessage.appendLine(
+            "${duckDNSNewSubdomainData.subdomainName}"
+        )
         else instructionMessage.appendLine("\"${duckDNSNewSubdomainData.subdomainName}\"")
 
         instructionMessage.append("3 - Token = ")
@@ -40,7 +38,7 @@ fun createSubdomain() {
         instructionMessage.appendLine("4 - Enable IPv4 = ${duckDNSNewSubdomainData.enableIPv4}")
         instructionMessage.appendLine("5 - Enable IPv6 = ${duckDNSNewSubdomainData.enableIPv6}")
         instructionMessage.append("> ")
-        command = readInteger(instructionMessage.toString(), 0..5)
+        command = console.readInteger(instructionMessage.toString(), 0..5)
         println()
 
         when (command) {
@@ -52,13 +50,16 @@ fun createSubdomain() {
                     throw InputMismatchException("Duck DNS Account token is ${duckDNSNewSubdomainData.token}")
 
                 println("Saving and exiting...")
-                val subdomain = Subdomain(duckDNSNewSubdomainData.subdomainName
-                        ?: return, duckDNSNewSubdomainData.enableIPv4, duckDNSNewSubdomainData.enableIPv6, duckDNSNewSubdomainData.token
-                        ?: return)
-                if (serializableSubdomainController?.subdomains?.contains(subdomain) == true)
-                    throw ObjectAlreadyExistsException("Subdomain with name: ${subdomain.subdomainName} already exists")
+                controller.create(
+                    Subdomain(
+                        duckDNSNewSubdomainData.subdomainName ?: return,
+                        duckDNSNewSubdomainData.enableIPv4,
+                        duckDNSNewSubdomainData.enableIPv6,
+                        duckDNSNewSubdomainData.token ?: return
+                    )
+                )
 
-                serializableSubdomainController?.subdomains?.add(subdomain)
+
 
                 command = 0
             } catch (e: InputMismatchException) {
@@ -66,10 +67,13 @@ fun createSubdomain() {
             } catch (e: ObjectAlreadyExistsException) {
                 e.printStackTrace()
             }
-            2 -> duckDNSNewSubdomainData.subdomainName = readString("Subdomain address: ").toLowerCase()
-            3 -> duckDNSNewSubdomainData.token = readString("Token: ")
-            4 -> duckDNSNewSubdomainData.enableIPv4 = !duckDNSNewSubdomainData.enableIPv4
-            5 -> duckDNSNewSubdomainData.enableIPv6 = !duckDNSNewSubdomainData.enableIPv6
+            2 -> duckDNSNewSubdomainData.subdomainName =
+                console.readString("Subdomain address: ").toLowerCase()
+            3 -> duckDNSNewSubdomainData.token = console.readString("Token: ")
+            4 -> duckDNSNewSubdomainData.enableIPv4 =
+                !duckDNSNewSubdomainData.enableIPv4
+            5 -> duckDNSNewSubdomainData.enableIPv6 =
+                !duckDNSNewSubdomainData.enableIPv6
         }
     }
 }

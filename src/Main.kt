@@ -1,41 +1,37 @@
-import console.console
-import console.quickSetupConsole
-import controller.SerializableSubdomainController
+import console.helpMenu
+import exception.GraphicsIsNotSupportedException
+import gui.MainMenu
 import java.awt.GraphicsEnvironment
-import java.io.FileNotFoundException
-import java.io.IOException
 
 /**
- * Subdomain object controller
- */
-var serializableSubdomainController: SerializableSubdomainController? = null
-
-/**
- * Chooses what interface will be used for communicating to the user
+ * Main function. It Chooses what interface will be used for communicating to the user.
+ * @param args Execution parameters.
  */
 fun main(args: Array<String>) {
+    controller.initialize()
 
-    if (serializableSubdomainController == null)
-        try {
-            serializableSubdomainController = SerializableSubdomainController(true)
-        } catch (e: FileNotFoundException) {
-            serializableSubdomainController = SerializableSubdomainController()
-            serializableSubdomainController?.saveSubdomains()
-
-            if (GraphicsEnvironment.isHeadless()) quickSetupConsole()
-            else TODO("Not yet implemented")
-        } catch (e: SecurityException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
+    if (args.isNotEmpty() && args.contains("--console")) {
+        console.console()
+        controller.finalize()
+    } else if (args.isNotEmpty() && args.contains("--gui")) {
+        if (GraphicsEnvironment.isHeadless())
+            throw GraphicsIsNotSupportedException()
+        val mainMenu = MainMenu()
+        mainMenu.addCloseOperation {
+            controller.finalize()
         }
 
-    if (args.isNotEmpty() && args.contains("console"))
-        console()
-    else if (GraphicsEnvironment.isHeadless())
-        console()
-    else if (args.isNotEmpty() && args.contains("gui"))
-        TODO("Not yet implemented")
-    else
-        serializableSubdomainController?.run()
+
+    } else if (args.isNotEmpty() && args.contains("--run-once"))
+        controller.updateIPAddress()
+    else if (args.isNotEmpty() && args.any { it.contains("--infinite-loop") }) {
+        var time: Long = 1
+        val timeStr = args.find { it.contains("time=") }
+        timeStr?.let {
+            time = it.substring(it.indexOf("time=") + 5, it.length - 1).toLong()
+        }
+        controller.updateIPAddress(true, time)
+    } else {
+        helpMenu()
+    }
 }

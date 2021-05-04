@@ -4,7 +4,7 @@ import console.printHeader
 import console.readInteger
 
 /**
- * Menu that helps console users to choose what they want to do with subdomains objects
+ * Menu that helps console users to choose what they want to do with subdomains objects.
  */
 fun subdomainMenu() {
 
@@ -26,7 +26,7 @@ fun subdomainMenu() {
         when (command) {
             0 -> println("Exiting...")
             1 -> createSubdomain()
-            2 -> retrieveSubdomain()
+            2 -> printAllSubdomains()
             3 -> updateSubdomain()
             4 -> deleteSubdomain()
         }

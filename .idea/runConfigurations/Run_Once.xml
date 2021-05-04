@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Once" type="JetRunConfigurationType">
+    <option name="MAIN_CLASS_NAME" value="MainKt" />
+    <module name="Duck DNS" />
+    <option name="PROGRAM_PARAMETERS" value="--run-once" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
