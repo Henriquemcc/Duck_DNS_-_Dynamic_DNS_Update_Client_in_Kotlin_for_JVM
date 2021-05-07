@@ -1,4 +1,4 @@
-[Versão em Português](SECURITY.md)
+[Versão em Português](SECURITY.PT.md)
 
 # Security Policy
 

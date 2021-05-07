@@ -1,35 +1,62 @@
-private val DuckDNS = DynamicDNS()
+import console.helpMenu
+import controller.updateIPAddress
+import exception.GraphicsIsNotSupportedException
+import gui.MainMenu
+import java.awt.GraphicsEnvironment
 
 /**
- * This is the main method.
- * @param args Command line parameter.
+ * Main function. It Chooses what interface will be used for communicating to the user.
+ * @param args Execution parameters.
  */
 fun main(args: Array<String>) {
-    var enableIPv6 = true
-    var enableIPv4 = true
+    controller.initialize()
 
-    when {
-        "--IPv6-only" in args -> {
-            enableIPv6 = true
-            enableIPv4 = false
-        }
-
-        "--IPv4-only" in args -> {
-            enableIPv6 = false
-            enableIPv4 = true
-        }
+    if (args.isNotEmpty() && args.contains("--console")) {
+        runConsole()
+    } else if (args.isNotEmpty() && args.contains("--gui")) {
+        runGUI()
+    } else if (args.isNotEmpty() && args.contains("--run-once")) {
+        updateIPAddress()
+    } else if (args.isNotEmpty() && args.any { it.contains("--infinite-loop") }) {
+        runDuckDNSIPUpdaterInfiniteLoop(args)
+    } else if (args.isNotEmpty() && args.contains("--help")) {
+        helpMenu()
+    } else if (!GraphicsEnvironment.isHeadless()) {
+        runGUI()
+    } else {
+        helpMenu()
     }
+}
 
-    val loaded = DuckDNS.load()
-    if (!loaded) {
-        println("File Not Loaded")
-        println("Please, type:")
-        print("Subdomain: ")
-        DuckDNS.setDomain((readLine() ?: return).trim())
-        print("Token: ")
-        DuckDNS.setToken((readLine() ?: return).trim())
-        DuckDNS.save()
+/**
+ * Runs Duck DNS IP Address Updater in infinite loop.
+ */
+private fun runDuckDNSIPUpdaterInfiniteLoop(args: Array<String>) {
+    var time: Long = 1
+    val timeStr = args.find { it.contains("time=") }
+    timeStr?.let {
+        time = it.substring(it.indexOf("time=") + 5, it.length - 1).toLong()
     }
-    DuckDNS.update(enableIPv6, enableIPv4)
+    updateIPAddress(true, time)
+}
 
+/**
+ * Runs Graphical User Interface
+ */
+private fun runGUI() {
+    if (GraphicsEnvironment.isHeadless())
+        throw GraphicsIsNotSupportedException()
+
+    val mainMenu = MainMenu()
+    mainMenu.addCloseOperation {
+        controller.finalize()
+    }
+}
+
+/**
+ * Runs non-graphical user interface
+ */
+private fun runConsole() {
+    console.console()
+    controller.finalize()
 }

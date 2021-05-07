@@ -1,2 +1,4 @@
-/out
-DuckDNS.cfg
+.idea
+out
+lib
+.vs
