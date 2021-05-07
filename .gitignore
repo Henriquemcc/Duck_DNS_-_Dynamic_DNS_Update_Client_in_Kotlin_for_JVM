@@ -1,3 +1,4 @@
-/out
-DuckDNS.cfg
-subdomains.config.bin
+.idea
+out
+lib
+.vs
