@@ -4,12 +4,13 @@ import exception.ObjectAlreadyExistsException
 import model.Subdomain
 import java.io.*
 import java.lang.Thread.sleep
+import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 /**
  * File which will store Duck DNS IP Address Updater Settings.
  */
-private val configurationFile = File("subdomains.config.bin")
+private val configurationFile = Paths.get(System.getProperty("user.home"), ".duckdnsipupdater", "settings.bin").toFile()
 
 /**
  * Array list which will store Duck DNS Subdomains objects.
@@ -68,25 +69,20 @@ private fun load() {
  * Saves Duck DNS subdomains array list to configuration file.
  */
 private fun save() {
+    while (true)
+        try {
+            val fileOutputStream = FileOutputStream(configurationFile)
+            val objectOutputStream = ObjectOutputStream(fileOutputStream)
+            objectOutputStream.writeObject(subdomains)
+            objectOutputStream.close()
+            fileOutputStream.close()
+            break
 
-    var fileOutputStream: FileOutputStream? = null
-    var objectOutputStream: ObjectOutputStream? = null
-
-    try {
-        if (!configurationFile.exists())
+        } catch (e: FileNotFoundException) {
+            configurationFile.parentFile.mkdirs()
             configurationFile.createNewFile()
-        fileOutputStream = FileOutputStream(configurationFile)
-        objectOutputStream = ObjectOutputStream(fileOutputStream)
-        objectOutputStream.writeObject(subdomains)
-
-    } catch (e: FileNotFoundException) {
-        e.printStackTrace()
-    } catch (e: Exception) {
-        e.printStackTrace()
-    } finally {
-        objectOutputStream?.close()
-        fileOutputStream?.close()
-    }
+            e.printStackTrace()
+        }
 }
 
 /**
