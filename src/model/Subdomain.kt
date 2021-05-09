@@ -43,10 +43,19 @@ data class Subdomain(
     }
 
     /**
-     * Update Duck DNS Subdomain IP addresses
+     * Updates Duck DNS Subdomain IP addresses
      */
     fun updateIPAddress() {
-        if (enableIPv4) {
+
+        for(i in 0..5)
+            try {
+                clearIPAddresses()
+                break
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+        if (enableIPv4)
             for (i in 0..5)
                 try {
                     updateIPv4Address()
@@ -54,9 +63,8 @@ data class Subdomain(
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-        }
 
-        if (enableIPv6) {
+        if (enableIPv6)
             for (i in 0..5)
                 try {
                     updateIPv6Address()
@@ -66,7 +74,7 @@ data class Subdomain(
                 } catch (e: IPv6NotFoundException) {
                     e.printStackTrace()
                 }
-        }
+
     }
 
     /**
@@ -102,5 +110,19 @@ data class Subdomain(
         val msg = br.readLine()
         if (!msg.contains("OK"))
             throw IOException("Failed to update IPv4 address: $msg")
+    }
+
+    /**
+     * Clears Duck DNS Subdomain IP addresses.
+     */
+    private fun clearIPAddresses() {
+        val clearUrl =
+            "https://www.duckdns.org/update?domains=$subdomainName&token=$token&clear=true"
+        val url = URL(clearUrl)
+        val uc = url.openConnection() as HttpsURLConnection
+        val br = BufferedReader(InputStreamReader(uc.inputStream))
+        val msg = br.readLine()
+        if (!msg.contains("OK"))
+            throw IOException("Failed to clear IP addresses: $msg")
     }
 }
