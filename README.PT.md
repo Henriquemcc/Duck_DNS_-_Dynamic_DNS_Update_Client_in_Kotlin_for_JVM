@@ -1,4 +1,4 @@
-[English Version](README.EN.md)
+[English Version](README.md)
 
 # Atualizador de endereço IP do subdomínio do DuckDNS em Kotlin/JVM
 
