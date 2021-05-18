@@ -1,5 +1,8 @@
 package duckdns.console
 
+import duckdns.international.resourceBundle
+import java.text.MessageFormat
+
 /**
  * Reads an integer number from standard input.
  * @param instructionMessage Instruction message to print.
@@ -17,7 +20,11 @@ fun readInteger(instructionMessage: String? = null, range: IntRange? = null): In
             e.printStackTrace()
         }
         if (range?.contains(integerNumberRead) == false)
-            println("$integerNumberRead is not in $range")
+            println(MessageFormat.format(
+                resourceBundle.getString("0.is.not.in"),
+                integerNumberRead,
+                range
+            ))
     }
 
     return integerNumberRead

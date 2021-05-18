@@ -2,9 +2,11 @@ package duckdns.gui
 
 import duckdns.controller.updateIPAddress
 import duckdns.gui.subdomain.SubdomainMenu
+import duckdns.international.resourceBundle
 import java.awt.GridLayout
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
+import java.text.MessageFormat
 import javax.swing.JButton
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -17,7 +19,7 @@ class MainMenu {
     /**
      * Subdomains menu's window.
      */
-    private val jFrame = JFrame("Duck DNS IP Address Updater")
+    private val jFrame = JFrame(resourceBundle.getString("duck.dns.ip.address.updater").capitalize())
 
     /**
      * Array list with all child components created by this class.
@@ -36,7 +38,10 @@ class MainMenu {
      * @return A JButton object initialized.
      */
     private fun buttonRunDuckDNSIPAddressUpdaterOnceInit(): JButton {
-        val buttonRunDuckDNSIPAddressUpdaterOnce = JButton("Run Duck DNS IP Address Updater Once")
+        val buttonRunDuckDNSIPAddressUpdaterOnce = JButton(MessageFormat.format(
+            resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
+            resourceBundle.getString("duck.dns.ip.address.updater")
+        ))
         buttonRunDuckDNSIPAddressUpdaterOnce.font = defaultFont
         buttonRunDuckDNSIPAddressUpdaterOnce.addActionListener {
             jFrame.isVisible = false
@@ -51,7 +56,7 @@ class MainMenu {
      * @return A JButton initialized.
      */
     private fun buttonSubdomainMenuInit(): JButton {
-        val buttonSubdomainMenu = JButton("Subdomain menu")
+        val buttonSubdomainMenu = JButton(resourceBundle.getString("subdomain.menu").capitalize())
         buttonSubdomainMenu.font = defaultFont
         buttonSubdomainMenu.addActionListener {
             jFrame.isVisible = false
@@ -94,7 +99,10 @@ class MainMenu {
     }
 
     private fun buttonRunDuckDNSIPAddressUpdaterInInfiniteLoopInit(): JButton {
-        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = JButton("Run Duck DNS IP Address Updater in infinite loop")
+        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = JButton(MessageFormat.format(
+            resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
+            resourceBundle.getString("duck.dns.ip.address.updater")
+        ))
         buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop.font = defaultFont
         buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop.addActionListener {
             jFrame.isVisible = false

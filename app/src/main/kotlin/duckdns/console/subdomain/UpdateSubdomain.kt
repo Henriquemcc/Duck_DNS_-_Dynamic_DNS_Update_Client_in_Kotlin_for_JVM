@@ -4,7 +4,26 @@ import duckdns.console.printHeader
 import duckdns.console.readInteger
 import duckdns.console.readString
 import duckdns.controller.getSubdomains
+import duckdns.international.resourceBundle
 import duckdns.model.Subdomain
+
+private val headerTitleMainUpdateMenu = resourceBundle.getString("subdomain.update.menu").capitalize()
+private val headerTitleUpdateByPositionMenu = resourceBundle.getString("subdomain.update.by.position.menu").capitalize()
+private val optionsSubtitle = "${resourceBundle.getString("options").capitalize()}:"
+private val exitOption = "0 - ${resourceBundle.getString("exit").capitalize()}"
+private val listSubdomainsOption = "1 - ${resourceBundle.getString("list.subdomains").capitalize()}"
+private val updateSubdomainByPosition = "2 - ${resourceBundle.getString("update.subdomain.by.position").capitalize()}"
+private val updateSubdomainByName = "3 - ${resourceBundle.getString("update.subdomain.by.name").capitalize()}"
+private val exitingMessage = "${resourceBundle.getString("exiting").capitalize()}..."
+private val savingAndExitingMessage = "${resourceBundle.getString("saving.and.exiting").capitalize()}..."
+private val cancelAndExitOption = "0 - ${resourceBundle.getString("cancel.and.exit").capitalize()}"
+private val saveAndExitOption = "1 - ${resourceBundle.getString("save.and.exit").capitalize()}"
+private val subdomainNameOption = "2 - ${resourceBundle.getString("subdomain.name").capitalize()} = "
+private val tokenOption = "3 - ${resourceBundle.getString("token").capitalize()} = "
+private val enableIPv4Option = "4 - ${resourceBundle.getString("enable.IPv4").capitalize()} = "
+private val enableIPv6Option = "5 - ${resourceBundle.getString("enable.IPv6").capitalize()} = "
+private val subdomainNameMessage = "${resourceBundle.getString("subdomain.name").capitalize()}: "
+private val tokenMessage = "${resourceBundle.getString("token").capitalize()}: "
 
 /**
  * Menu that helps console user to update a Duck DNS Subdomain Object.
@@ -13,20 +32,20 @@ fun updateSubdomain() {
 
     var command: Int? = null
     val instructionMessage = StringBuilder()
-    instructionMessage.appendLine("Options:")
-    instructionMessage.appendLine("0 - Exit")
-    instructionMessage.appendLine("1 - List Subdomains")
-    instructionMessage.appendLine("2 - Select Subdomain by it's position and update it")
-    instructionMessage.appendLine("3 - Select Subdomain by it's name and update it")
+    instructionMessage.appendLine(optionsSubtitle)
+    instructionMessage.appendLine(exitOption)
+    instructionMessage.appendLine(listSubdomainsOption)
+    instructionMessage.appendLine(updateSubdomainByPosition)
+    instructionMessage.appendLine(updateSubdomainByName)
     instructionMessage.append("> ")
 
     while (command != 0) {
-        printHeader("Subdomain update menu")
+        printHeader(headerTitleMainUpdateMenu)
         command = readInteger(instructionMessage.toString(), 0..3)
         println()
 
         when (command) {
-            0 -> println("Exiting...")
+            0 -> println(exitingMessage)
             1 -> printAllSubdomains()
             2 -> updateByPosition()
             3 -> updateByName()
@@ -69,13 +88,13 @@ private fun update(oldSubdomain: Subdomain) {
 
     var command: Int? = null
     while (command != 0 && command != 1) {
-        printHeader("Subdomain update by position menu")
+        printHeader(headerTitleUpdateByPositionMenu)
         val updateInstructionMessage = StringBuilder()
-        updateInstructionMessage.appendLine("Options:")
-        updateInstructionMessage.appendLine("0 - Cancel and exit")
-        updateInstructionMessage.appendLine("1 - Save and exit")
+        updateInstructionMessage.appendLine(optionsSubtitle)
+        updateInstructionMessage.appendLine(cancelAndExitOption)
+        updateInstructionMessage.appendLine(saveAndExitOption)
 
-        updateInstructionMessage.append("2 - Subdomain Name = ")
+        updateInstructionMessage.append(subdomainNameOption)
         updateInstructionMessage.append(oldSubdomain.subdomainName)
         if (oldSubdomain.subdomainName != newSubdomainName) {
             updateInstructionMessage.append(" -> ")
@@ -83,7 +102,7 @@ private fun update(oldSubdomain: Subdomain) {
         }
         updateInstructionMessage.appendLine()
 
-        updateInstructionMessage.append("3 - Token = ")
+        updateInstructionMessage.append(tokenOption)
         updateInstructionMessage.append(oldSubdomain.token)
         if (oldSubdomain.token != newSubdomainToken) {
             updateInstructionMessage.append(" -> ")
@@ -91,7 +110,7 @@ private fun update(oldSubdomain: Subdomain) {
         }
         updateInstructionMessage.appendLine()
 
-        updateInstructionMessage.append("4 - Enable IPv4 = ")
+        updateInstructionMessage.append(enableIPv4Option)
         updateInstructionMessage.append(oldSubdomain.enableIPv4)
         if (oldSubdomain.enableIPv4 != newSubdomainEnableIPv4) {
             updateInstructionMessage.append(" -> ")
@@ -99,7 +118,7 @@ private fun update(oldSubdomain: Subdomain) {
         }
         updateInstructionMessage.appendLine()
 
-        updateInstructionMessage.append("5 - Enable IPv6 = ")
+        updateInstructionMessage.append(enableIPv6Option)
         updateInstructionMessage.append(oldSubdomain.enableIPv6)
         if (oldSubdomain.enableIPv6 != newSubdomainEnableIPv6) {
             updateInstructionMessage.append(" -> ")
@@ -112,16 +131,16 @@ private fun update(oldSubdomain: Subdomain) {
         println()
 
         when (command) {
-            0 -> println("Exiting...")
+            0 -> println(exitingMessage)
             1 -> {
-                println("Saving and exiting...")
+                println(savingAndExitingMessage)
 
 
                 duckdns.controller.update(oldSubdomain, Subdomain(newSubdomainName, newSubdomainEnableIPv4, newSubdomainEnableIPv6, newSubdomainToken))
 
             }
-            2 -> newSubdomainName = readString("Subdomain address:\n> ").toLowerCase()
-            3 -> newSubdomainToken = readString("Token:\n> ")
+            2 -> newSubdomainName = readString(subdomainNameMessage).toLowerCase()
+            3 -> newSubdomainToken = readString(tokenMessage)
             4 -> newSubdomainEnableIPv4 = !oldSubdomain.enableIPv4
             5 -> newSubdomainEnableIPv6 = !oldSubdomain.enableIPv6
         }

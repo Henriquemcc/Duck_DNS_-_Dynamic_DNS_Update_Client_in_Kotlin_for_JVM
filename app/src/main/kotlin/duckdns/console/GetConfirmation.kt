@@ -1,6 +1,10 @@
 package duckdns.console
 
+import duckdns.international.resourceBundle
 import java.util.*
+
+private val yesLetter = resourceBundle.getString("y").toLowerCase()[0]
+private val noLetter = resourceBundle.getString("n").toLowerCase()[0]
 
 /**
  * Get from user the confirmation of a procedure.
@@ -9,10 +13,10 @@ import java.util.*
  */
 fun getConfirmation(instructionMessage: String): Boolean {
     var confirmation: Char? = null
-    while (confirmation != 'Y' && confirmation != 'N' && confirmation != 'n') {
+    while (confirmation != yesLetter.toUpperCase() && confirmation != yesLetter.toLowerCase() && confirmation != noLetter.toUpperCase() && confirmation != noLetter.toLowerCase()) {
         try {
             confirmation = readString(instructionMessage).trim()[0]
-            if (confirmation != 'Y' && confirmation != 'N')
+            if (confirmation != yesLetter.toUpperCase() && confirmation != yesLetter.toLowerCase() && confirmation != noLetter.toUpperCase() && confirmation != noLetter.toLowerCase())
                 throw InputMismatchException()
         } catch (e: InputMismatchException) {
             e.printStackTrace()
@@ -20,5 +24,5 @@ fun getConfirmation(instructionMessage: String): Boolean {
 
     }
 
-    return confirmation == 'Y'
+    return confirmation == yesLetter.toLowerCase() || confirmation == yesLetter.toUpperCase()
 }
