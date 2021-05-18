@@ -27,10 +27,12 @@ fun getSubDomainName(instructionMessage: String? = subdomainNameInstructionMessa
 
         if (!subdomainFounded) {
             val subdomainNotFoundedInstructionMessage = StringBuilder()
-            subdomainNotFoundedInstructionMessage.appendLine(MessageFormat.format(
-                subdomainNotFoundErrorMessage,
-                subdomainName
-            ))
+            subdomainNotFoundedInstructionMessage.appendLine(
+                MessageFormat.format(
+                    subdomainNotFoundErrorMessage,
+                    subdomainName
+                )
+            )
             subdomainNotFoundedInstructionMessage.appendLine(searchAgainMessage)
             subdomainNotFoundedInstructionMessage.appendLine(yesOption)
             subdomainNotFoundedInstructionMessage.appendLine(noOption)

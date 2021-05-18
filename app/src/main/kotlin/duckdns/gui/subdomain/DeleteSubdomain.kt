@@ -17,10 +17,14 @@ class DeleteSubdomain(private val subdomainMenu: SubdomainMenu, private val oldS
      * Initializes DeleteSubdomain class and all it's components.
      */
     init {
-        val confirmation = getConfirmation("${MessageFormat.format(
-            resourceBundle.getString("are.you.sure.you.want.to.delete.0.subdomain").capitalize(),
-            oldSubdomain
-        )}?")//"Are you sure you want to delete $oldSubdomain subdomain?"
+        val confirmation = getConfirmation(
+            "${
+                MessageFormat.format(
+                    resourceBundle.getString("are.you.sure.you.want.to.delete.0.subdomain").capitalize(),
+                    oldSubdomain
+                )
+            }?"
+        )//"Are you sure you want to delete $oldSubdomain subdomain?"
         if (confirmation) {
             remove(oldSubdomain)
             subdomainMenu.refreshTableSubdomains()

@@ -38,10 +38,12 @@ class MainMenu {
      * @return A JButton object initialized.
      */
     private fun buttonRunDuckDNSIPAddressUpdaterOnceInit(): JButton {
-        val buttonRunDuckDNSIPAddressUpdaterOnce = JButton(MessageFormat.format(
-            resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
-            resourceBundle.getString("duck.dns.ip.address.updater")
-        ))
+        val buttonRunDuckDNSIPAddressUpdaterOnce = JButton(
+            MessageFormat.format(
+                resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
+                resourceBundle.getString("duck.dns.ip.address.updater")
+            )
+        )
         buttonRunDuckDNSIPAddressUpdaterOnce.font = defaultFont
         buttonRunDuckDNSIPAddressUpdaterOnce.addActionListener {
             jFrame.isVisible = false
@@ -99,10 +101,12 @@ class MainMenu {
     }
 
     private fun buttonRunDuckDNSIPAddressUpdaterInInfiniteLoopInit(): JButton {
-        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = JButton(MessageFormat.format(
-            resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
-            resourceBundle.getString("duck.dns.ip.address.updater")
-        ))
+        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = JButton(
+            MessageFormat.format(
+                resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
+                resourceBundle.getString("duck.dns.ip.address.updater")
+            )
+        )
         buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop.font = defaultFont
         buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop.addActionListener {
             jFrame.isVisible = false

@@ -20,11 +20,13 @@ fun readInteger(instructionMessage: String? = null, range: IntRange? = null): In
             e.printStackTrace()
         }
         if (range?.contains(integerNumberRead) == false)
-            println(MessageFormat.format(
-                resourceBundle.getString("0.is.not.in"),
-                integerNumberRead,
-                range
-            ))
+            println(
+                MessageFormat.format(
+                    resourceBundle.getString("0.is.not.in"),
+                    integerNumberRead,
+                    range
+                )
+            )
     }
 
     return integerNumberRead

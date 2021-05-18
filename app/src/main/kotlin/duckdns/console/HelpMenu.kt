@@ -9,14 +9,18 @@ private val optionsSubtitle = "${resourceBundle.getString("options").capitalize(
 private val gettingHelpTitle = "\t${resourceBundle.getString("getting.help").capitalize()}:"
 private val openingConsoleMenuTitle = "\t${resourceBundle.getString("opening.console.menu").capitalize()}:"
 private val openingGraphicalUserInterfaceMenuTitle = "\t${resourceBundle.getString("opening.graphical.user.interface.menu").capitalize()}:"
-private val runningJustOneTimeTitle = "\t${MessageFormat.format(
-    resourceBundle.getString("running.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
-    resourceBundle.getString("duck.dns.ip.address.updater")
-)}:"
-private val runningInInfiniteLoopTitle = "\t${MessageFormat.format(
-    resourceBundle.getString("running.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
-    resourceBundle.getString("duck.dns.ip.address.updater")
-)}:"
+private val runningJustOneTimeTitle = "\t${
+    MessageFormat.format(
+        resourceBundle.getString("running.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
+        resourceBundle.getString("duck.dns.ip.address.updater")
+    )
+}:"
+private val runningInInfiniteLoopTitle = "\t${
+    MessageFormat.format(
+        resourceBundle.getString("running.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
+        resourceBundle.getString("duck.dns.ip.address.updater")
+    )
+}:"
 
 /**
  * Displays Help Menu

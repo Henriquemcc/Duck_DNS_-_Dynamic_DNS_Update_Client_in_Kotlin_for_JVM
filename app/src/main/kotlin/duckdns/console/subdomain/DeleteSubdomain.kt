@@ -20,14 +20,18 @@ private val deleteSubdomainByPositionOption = "2 - ${resourceBundle.getString("d
 private val deleteSubdomainByNameOption = "3 - ${resourceBundle.getString("delete.subdomain.by.name").capitalize()}"
 private val deleteAllSubdomainsOption = "4 - ${resourceBundle.getString("delete.all.subdomains").capitalize()}"
 private val exitingMessage = "${resourceBundle.getString("exiting").capitalize()}..."
-private val deletionConfirmationMessageSingleSubdomainObject = "${MessageFormat.format(
-    resourceBundle.getString("are.you.sure.you.want.to.delete.this.Duck.DNS.subdomain.object").capitalize(),
-    resourceBundle.getString("duck.dns")
-)}:"
-private val deletionConfirmationMessageAllSubdomainsObjects = "${MessageFormat.format(
-    resourceBundle.getString("are.you.sure.you.want.to.delete.all.Duck.DNS.subdomains").capitalize(),
-    resourceBundle.getString("duck.dns")
-)}?"
+private val deletionConfirmationMessageSingleSubdomainObject = "${
+    MessageFormat.format(
+        resourceBundle.getString("are.you.sure.you.want.to.delete.this.Duck.DNS.subdomain.object").capitalize(),
+        resourceBundle.getString("duck.dns")
+    )
+}:"
+private val deletionConfirmationMessageAllSubdomainsObjects = "${
+    MessageFormat.format(
+        resourceBundle.getString("are.you.sure.you.want.to.delete.all.Duck.DNS.subdomains").capitalize(),
+        resourceBundle.getString("duck.dns")
+    )
+}?"
 private val yesOption = resourceBundle.getString("y.yes").capitalize()
 private val noOption = resourceBundle.getString("n.no").capitalize()
 

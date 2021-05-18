@@ -11,14 +11,16 @@ private val exitOption = "0 - ${resourceBundle.getString("exit").capitalize()}"
 private val subdomainMenuOption = "1 - ${resourceBundle.getString("subdomain.menu").capitalize()}"
 private val runningJustOneTimeOption = "2 - ${
     MessageFormat.format(
-    resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
-    resourceBundle.getString("duck.dns.ip.address.updater")
-)}"
+        resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
+        resourceBundle.getString("duck.dns.ip.address.updater")
+    )
+}"
 private val runningInInfiniteLoopOption = "3 - ${
     MessageFormat.format(
-    resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
-    resourceBundle.getString("duck.dns.ip.address.updater")
-)}"
+        resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
+        resourceBundle.getString("duck.dns.ip.address.updater")
+    )
+}"
 private val headerTitleMainMenu = resourceBundle.getString("main.menu").capitalize()
 private val exitingMessage = "${resourceBundle.getString("exiting").capitalize()}..."
 
