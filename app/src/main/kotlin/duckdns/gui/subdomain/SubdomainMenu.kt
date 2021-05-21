@@ -4,6 +4,7 @@ import duckdns.controller.getSubdomains
 import duckdns.gui.MainMenu
 import duckdns.gui.defaultFont
 import duckdns.gui.defaultLocation
+import duckdns.international.resourceBundle
 import duckdns.model.Subdomain
 import java.awt.FlowLayout
 import java.awt.GridLayout
@@ -21,7 +22,7 @@ class SubdomainMenu(private val mainMenu: MainMenu) {
     /**
      * Subdomain menu's window.
      */
-    private val jFrame = JFrame("Duck DNS Subdomain Menu")
+    private val jFrame = JFrame(resourceBundle.getString("subdomain.menu").capitalize())
 
     /**
      * JTable that will show for GUI user Duck DNS Subdomains objects stored on Subdomain object array list.
@@ -128,7 +129,7 @@ class SubdomainMenu(private val mainMenu: MainMenu) {
      * @return A JButton object initialized.
      */
     private fun buttonDeleteInit(): JButton {
-        val buttonDelete = JButton("Delete")
+        val buttonDelete = JButton(resourceBundle.getString("delete").capitalize())
         buttonDelete.font = defaultFont
         buttonDelete.addActionListener {
             val row = jTableSubdomains.selectedRow
@@ -149,7 +150,7 @@ class SubdomainMenu(private val mainMenu: MainMenu) {
      * @return A JButton object initialized.
      */
     private fun buttonUpdateInit(): JButton {
-        val buttonUpdate = JButton("Update")
+        val buttonUpdate = JButton(resourceBundle.getString("update").capitalize())
         buttonUpdate.font = defaultFont
         buttonUpdate.addActionListener {
             val row = jTableSubdomains.selectedRow
@@ -171,7 +172,7 @@ class SubdomainMenu(private val mainMenu: MainMenu) {
      * @return A JButton object initialized.
      */
     private fun buttonRetrieveInit(): JButton {
-        val buttonRetrieve = JButton("Retrieve")
+        val buttonRetrieve = JButton(resourceBundle.getString("retrieve").capitalize())
         buttonRetrieve.font = defaultFont
         buttonRetrieve.addActionListener {
             refreshTableSubdomains()
@@ -185,7 +186,7 @@ class SubdomainMenu(private val mainMenu: MainMenu) {
      * @return A JButton object initialized.
      */
     private fun buttonCreateInit(): JButton {
-        val buttonCreate = JButton("Create")
+        val buttonCreate = JButton(resourceBundle.getString("create").capitalize())
         buttonCreate.font = defaultFont
         buttonCreate.addActionListener {
             jFrame.isVisible = false
@@ -282,10 +283,10 @@ class SubdomainMenu(private val mainMenu: MainMenu) {
          */
         override fun getColumnName(column: Int): String {
             return when (column) {
-                0 -> "Subdomain name"
-                1 -> "Enable IPv4"
-                2 -> "Enable IPv6"
-                3 -> "Token"
+                0 -> resourceBundle.getString("subdomain.name").capitalize()
+                1 -> resourceBundle.getString("enable.IPv4").capitalize()
+                2 -> resourceBundle.getString("enable.IPv6").capitalize()
+                3 -> resourceBundle.getString("token").capitalize()
                 else -> ""
             }
         }

@@ -5,7 +5,35 @@ import duckdns.console.printHeader
 import duckdns.console.readInteger
 import duckdns.controller.getSubdomains
 import duckdns.controller.remove
+import duckdns.international.resourceBundle
 import duckdns.model.Subdomain
+import java.text.MessageFormat
+
+private val headerTitleMainDeletionMenu = resourceBundle.getString("subdomain.deletion.menu").capitalize()
+private val headerTitleDeletionByPositionMenu = resourceBundle.getString("subdomain.deletion.by.position.menu").capitalize()
+private val headerTitleDeletionByNameMenu = resourceBundle.getString("subdomain.deletion.by.name").capitalize()
+private val headerTitleSubdomainDeleteAllMenu = resourceBundle.getString("subdomain.delete.all.menu").capitalize()
+private val optionsSubtitle = "${resourceBundle.getString("options").capitalize()}:"
+private val exitOption = "0 - ${resourceBundle.getString("exit").capitalize()}"
+private val listSubdomainsOption = "1 - ${resourceBundle.getString("list.subdomains").capitalize()}"
+private val deleteSubdomainByPositionOption = "2 - ${resourceBundle.getString("delete.subdomain.by.position").capitalize()}"
+private val deleteSubdomainByNameOption = "3 - ${resourceBundle.getString("delete.subdomain.by.name").capitalize()}"
+private val deleteAllSubdomainsOption = "4 - ${resourceBundle.getString("delete.all.subdomains").capitalize()}"
+private val exitingMessage = "${resourceBundle.getString("exiting").capitalize()}..."
+private val deletionConfirmationMessageSingleSubdomainObject = "${
+    MessageFormat.format(
+        resourceBundle.getString("are.you.sure.you.want.to.delete.this.Duck.DNS.subdomain.object").capitalize(),
+        resourceBundle.getString("duck.dns")
+    )
+}:"
+private val deletionConfirmationMessageAllSubdomainsObjects = "${
+    MessageFormat.format(
+        resourceBundle.getString("are.you.sure.you.want.to.delete.all.Duck.DNS.subdomains").capitalize(),
+        resourceBundle.getString("duck.dns")
+    )
+}?"
+private val yesOption = resourceBundle.getString("y.yes").capitalize()
+private val noOption = resourceBundle.getString("n.no").capitalize()
 
 /**
  * Menu that helps console user to delete a Duck DNS Subdomain Object.
@@ -15,21 +43,21 @@ fun deleteSubdomain() {
     var command: Int? = null
 
     val instructionMessage = StringBuilder()
-    instructionMessage.appendLine("Options:")
-    instructionMessage.appendLine("0 - Exit")
-    instructionMessage.appendLine("1 - List Subdomains")
-    instructionMessage.appendLine("2 - Select Subdomain by it's position and delete it")
-    instructionMessage.appendLine("3 - Select Subdomain by it's name and delete it")
-    instructionMessage.appendLine("4 - Delete all Subdomains")
+    instructionMessage.appendLine(optionsSubtitle)
+    instructionMessage.appendLine(exitOption)
+    instructionMessage.appendLine(listSubdomainsOption)
+    instructionMessage.appendLine(deleteSubdomainByPositionOption)
+    instructionMessage.appendLine(deleteSubdomainByNameOption)
+    instructionMessage.appendLine(deleteAllSubdomainsOption)
     instructionMessage.append("> ")
 
     while (command != 0) {
-        printHeader("Subdomain deletion menu")
+        printHeader(headerTitleMainDeletionMenu)
         command = readInteger(instructionMessage.toString(), 0..4)
         println()
 
         when (command) {
-            0 -> println("Exiting...")
+            0 -> println(exitingMessage)
             1 -> printAllSubdomains()
             2 -> deleteByPosition()
             3 -> deleteByName()
@@ -43,7 +71,7 @@ fun deleteSubdomain() {
  */
 private fun deleteByPosition() {
 
-    printHeader("Subdomain delete by position menu")
+    printHeader(headerTitleDeletionByPositionMenu)
     val position = getSubDomainPosition()
     val subdomain = getSubdomains()[position]
     delete(subdomain)
@@ -57,11 +85,11 @@ private fun deleteByPosition() {
  */
 private fun delete(subdomain: Subdomain) {
     val deleteConfirmationMessage = StringBuilder()
-    deleteConfirmationMessage.appendLine("Are you sure you want to delete this Duck DNS Subdomain object:")
+    deleteConfirmationMessage.appendLine(deletionConfirmationMessageSingleSubdomainObject)
     deleteConfirmationMessage.appendLine(subdomain.toString())
     deleteConfirmationMessage.appendLine(" ?")
-    deleteConfirmationMessage.appendLine("Y - Yes")
-    deleteConfirmationMessage.appendLine("N - No")
+    deleteConfirmationMessage.appendLine(yesOption)
+    deleteConfirmationMessage.appendLine(noOption)
     deleteConfirmationMessage.append("> ")
 
     val confirmation = getConfirmation(deleteConfirmationMessage.toString())
@@ -76,7 +104,7 @@ private fun delete(subdomain: Subdomain) {
  */
 private fun deleteByName() {
 
-    printHeader("Subdomain delete by name menu")
+    printHeader(headerTitleDeletionByNameMenu)
     val subdomainName = getSubDomainName()
     val subDomain = getSubdomains().find {
         it.subdomainName.equals(
@@ -92,11 +120,11 @@ private fun deleteByName() {
  */
 private fun deleteAll() {
 
-    printHeader("Subdomain delete all menu")
+    printHeader(headerTitleSubdomainDeleteAllMenu)
     val deleteInstructionMessage = StringBuilder()
-    deleteInstructionMessage.appendLine("Are you sure you want to delete all Duck DNS Subdomains?")
-    deleteInstructionMessage.appendLine("Y - Yes")
-    deleteInstructionMessage.appendLine("N - No")
+    deleteInstructionMessage.appendLine(deletionConfirmationMessageAllSubdomainsObjects)
+    deleteInstructionMessage.appendLine(yesOption)
+    deleteInstructionMessage.appendLine(noOption)
     deleteInstructionMessage.append("> ")
     val confirmation = getConfirmation(deleteInstructionMessage.toString())
     println()

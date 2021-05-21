@@ -1,5 +1,6 @@
 package duckdns.gui
 
+import duckdns.international.resourceBundle
 import java.awt.Font
 import javax.swing.JFrame
 import javax.swing.JOptionPane
@@ -15,7 +16,7 @@ val defaultFont: Font = Font("Arial", Font.PLAIN, 20)
  * @return Boolean value whether final user confirm that action.
  */
 fun getConfirmation(message: String = ""): Boolean {
-    val jFrame = JFrame("Confirmation")
+    val jFrame = JFrame(resourceBundle.getString("confirmation").capitalize())
     jFrame.defaultCloseOperation = JFrame.DO_NOTHING_ON_CLOSE
     jFrame.font = defaultFont
     val confirmation = JOptionPane.showConfirmDialog(jFrame, message)

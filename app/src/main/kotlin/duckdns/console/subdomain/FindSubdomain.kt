@@ -4,13 +4,20 @@ import duckdns.console.getConfirmation
 import duckdns.console.readInteger
 import duckdns.console.readString
 import duckdns.controller.getSubdomains
+import duckdns.international.resourceBundle
+import java.text.MessageFormat
 
+private val subdomainNameInstructionMessage = "${resourceBundle.getString("subdomain.name").capitalize()}:\n> "
+private val subdomainNotFoundErrorMessage = resourceBundle.getString("subdomain.0.not.founded").capitalize()
+private val searchAgainMessage = "${resourceBundle.getString("would.you.like.to.search.again").capitalize()}?"
+private val yesOption = resourceBundle.getString("y.yes").capitalize()
+private val noOption = resourceBundle.getString("n.no").capitalize()
 
 /**
  * Get subdomain name, checking if it's subdomain name is in the subdomains array.
  * @param instructionMessage Instruction message to print.
  */
-fun getSubDomainName(instructionMessage: String? = "Subdomain name:\n> "): String {
+fun getSubDomainName(instructionMessage: String? = subdomainNameInstructionMessage): String {
     var subdomainName: String
     var searchAgain = false
 
@@ -20,10 +27,15 @@ fun getSubDomainName(instructionMessage: String? = "Subdomain name:\n> "): Strin
 
         if (!subdomainFounded) {
             val subdomainNotFoundedInstructionMessage = StringBuilder()
-            subdomainNotFoundedInstructionMessage.appendLine("Subdomain $subdomainName not founded")
-            subdomainNotFoundedInstructionMessage.appendLine("Would you like to search again?")
-            subdomainNotFoundedInstructionMessage.appendLine("Y - Yes")
-            subdomainNotFoundedInstructionMessage.appendLine("N - No")
+            subdomainNotFoundedInstructionMessage.appendLine(
+                MessageFormat.format(
+                    subdomainNotFoundErrorMessage,
+                    subdomainName
+                )
+            )
+            subdomainNotFoundedInstructionMessage.appendLine(searchAgainMessage)
+            subdomainNotFoundedInstructionMessage.appendLine(yesOption)
+            subdomainNotFoundedInstructionMessage.appendLine(noOption)
             subdomainNotFoundedInstructionMessage.append("> ")
             searchAgain = getConfirmation(subdomainNotFoundedInstructionMessage.toString())
             subdomainName = ""

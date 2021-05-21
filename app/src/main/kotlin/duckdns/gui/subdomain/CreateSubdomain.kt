@@ -4,6 +4,7 @@ import duckdns.controller.create
 import duckdns.gui.LowerCaseDocumentFilter
 import duckdns.gui.defaultFont
 import duckdns.gui.defaultLocation
+import duckdns.international.resourceBundle
 import duckdns.model.Subdomain
 import java.awt.GridLayout
 import java.awt.event.WindowAdapter
@@ -20,27 +21,27 @@ class CreateSubdomain(private val subdomainMenu: SubdomainMenu) {
     /**
      * Text field that will obtain from GUI user the Duck DNS subdomain's address.
      */
-    private val jTextFieldSubdomain = JTextField("Subdomain")
+    private val jTextFieldSubdomain = JTextField(resourceBundle.getString("subdomain.name").capitalize())
 
     /**
      * Text field that will obtain from GUI user the Duck DNS subdomain's token.
      */
-    private val jTextFieldToken = JTextField("Token")
+    private val jTextFieldToken = JTextField(resourceBundle.getString("token").capitalize())
 
     /**
      * Checkbox that will obtain from GUI user the Duck DNS subdomain's enable IPv6 attribute.
      */
-    private val jCheckBoxEnableIPv6 = JCheckBox("Enable IPv6", true)
+    private val jCheckBoxEnableIPv6 = JCheckBox(resourceBundle.getString("enable.IPv6").capitalize(), true)
 
     /**
      * Checkbox that will obtain from GUI user the Duck DNS subdomain's enable IPv4 attribute.
      */
-    private val jCheckBoxEnableIPv4 = JCheckBox("Enable IPv4", true)
+    private val jCheckBoxEnableIPv4 = JCheckBox(resourceBundle.getString("enable.IPv4").capitalize(), true)
 
     /**
      * JFrame which will store jPanel with other GUI components.
      */
-    private val jFrame = JFrame("Subdomain creation menu")
+    private val jFrame = JFrame(resourceBundle.getString("subdomain.creation.menu").capitalize())
 
     /**
      * Initializes CreateSubdomain class creating all GUI components recursively.
@@ -99,7 +100,7 @@ class CreateSubdomain(private val subdomainMenu: SubdomainMenu) {
      * @return A JButton object initialized.
      */
     private fun jButtonAddSubdomainInit(): JButton {
-        val jButtonAddSubdomain = JButton("Add Subdomain")
+        val jButtonAddSubdomain = JButton(resourceBundle.getString("add.a.subdomain").capitalize())
         jButtonAddSubdomain.font = defaultFont
         jButtonAddSubdomain.addActionListener {
             val subdomain = Subdomain(jTextFieldSubdomain.text.toLowerCase(), jCheckBoxEnableIPv4.isSelected, jCheckBoxEnableIPv6.isSelected, jTextFieldToken.text)

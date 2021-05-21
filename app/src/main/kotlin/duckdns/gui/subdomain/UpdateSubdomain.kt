@@ -4,6 +4,7 @@ import duckdns.controller.update
 import duckdns.gui.LowerCaseDocumentFilter
 import duckdns.gui.defaultFont
 import duckdns.gui.defaultLocation
+import duckdns.international.resourceBundle
 import duckdns.model.Subdomain
 import java.awt.GridLayout
 import java.awt.event.WindowAdapter
@@ -30,17 +31,17 @@ class UpdateSubdomain(private val subdomainMenu: SubdomainMenu, private val oldS
     /**
      * Checkbox that will obtain from GUI user the new Duck DNS subdomain's enable IPv6 attribute.
      */
-    private val jCheckBoxEnableIPv6 = JCheckBox("Enable IPv6", oldSubdomain.enableIPv6)
+    private val jCheckBoxEnableIPv6 = JCheckBox(resourceBundle.getString("enable.IPv6").capitalize(), oldSubdomain.enableIPv6)
 
     /**
      * Checkbox that will obtain from GUI user the new Duck DNS subdomain's enable IPv4 attribute.
      */
-    private val jCheckBoxEnableIPv4 = JCheckBox("Enable IPv4", oldSubdomain.enableIPv4)
+    private val jCheckBoxEnableIPv4 = JCheckBox(resourceBundle.getString("enable.IPv4").capitalize(), oldSubdomain.enableIPv4)
 
     /**
      * JFrame which will store jPanel with other GUI components.
      */
-    private val jFrame = JFrame("Subdomain update menu")
+    private val jFrame = JFrame(resourceBundle.getString("subdomain.update.menu").capitalize())
 
     /**
      * Initializes UpdateSubdomain class creating all GUI components recursively.
@@ -99,7 +100,7 @@ class UpdateSubdomain(private val subdomainMenu: SubdomainMenu, private val oldS
      * @return A JButton object initialized.
      */
     private fun jButtonUpdateSubdomainInit(): JButton {
-        val jButtonUpdateSubdomain = JButton("Update Subdomain")
+        val jButtonUpdateSubdomain = JButton(resourceBundle.getString("update.subdomain").capitalize())
         jButtonUpdateSubdomain.font = defaultFont
         jButtonUpdateSubdomain.addActionListener {
             val subdomain = Subdomain(jTextFieldSubdomain.text.toLowerCase(), jCheckBoxEnableIPv4.isSelected, jCheckBoxEnableIPv6.isSelected, jTextFieldToken.text)
