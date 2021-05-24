@@ -8,7 +8,8 @@ private val headerTitle = resourceBundle.getString("help.menu").capitalize()
 private val optionsSubtitle = "${resourceBundle.getString("options").capitalize()}:"
 private val gettingHelpTitle = "\t${resourceBundle.getString("getting.help").capitalize()}:"
 private val openingConsoleMenuTitle = "\t${resourceBundle.getString("opening.console.menu").capitalize()}:"
-private val openingGraphicalUserInterfaceMenuTitle = "\t${resourceBundle.getString("opening.graphical.user.interface.menu").capitalize()}:"
+private val openingGraphicalUserInterfaceMenuTitle =
+    "\t${resourceBundle.getString("opening.graphical.user.interface.menu").capitalize()}:"
 private val runningJustOneTimeTitle = "\t${
     MessageFormat.format(
         resourceBundle.getString("running.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),

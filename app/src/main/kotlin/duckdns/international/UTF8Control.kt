@@ -6,7 +6,13 @@ import java.io.InputStreamReader
 import java.util.*
 
 val UTF8ResourceBundleControl = object : ResourceBundle.Control() {
-    override fun newBundle(baseName: String, locale: Locale, format: String, loader: ClassLoader, reload: Boolean): ResourceBundle {
+    override fun newBundle(
+        baseName: String,
+        locale: Locale,
+        format: String,
+        loader: ClassLoader,
+        reload: Boolean
+    ): ResourceBundle {
 
         val bundleName = toBundleName(baseName, locale)
         val resourceName = toResourceName(bundleName, "properties")

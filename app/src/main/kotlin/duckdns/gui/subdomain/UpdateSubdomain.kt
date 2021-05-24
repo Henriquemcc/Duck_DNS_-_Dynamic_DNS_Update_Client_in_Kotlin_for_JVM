@@ -31,12 +31,14 @@ class UpdateSubdomain(private val subdomainMenu: SubdomainMenu, private val oldS
     /**
      * Checkbox that will obtain from GUI user the new Duck DNS subdomain's enable IPv6 attribute.
      */
-    private val jCheckBoxEnableIPv6 = JCheckBox(resourceBundle.getString("enable.IPv6").capitalize(), oldSubdomain.enableIPv6)
+    private val jCheckBoxEnableIPv6 =
+        JCheckBox(resourceBundle.getString("enable.IPv6").capitalize(), oldSubdomain.enableIPv6)
 
     /**
      * Checkbox that will obtain from GUI user the new Duck DNS subdomain's enable IPv4 attribute.
      */
-    private val jCheckBoxEnableIPv4 = JCheckBox(resourceBundle.getString("enable.IPv4").capitalize(), oldSubdomain.enableIPv4)
+    private val jCheckBoxEnableIPv4 =
+        JCheckBox(resourceBundle.getString("enable.IPv4").capitalize(), oldSubdomain.enableIPv4)
 
     /**
      * JFrame which will store jPanel with other GUI components.
@@ -103,7 +105,12 @@ class UpdateSubdomain(private val subdomainMenu: SubdomainMenu, private val oldS
         val jButtonUpdateSubdomain = JButton(resourceBundle.getString("update.subdomain").capitalize())
         jButtonUpdateSubdomain.font = defaultFont
         jButtonUpdateSubdomain.addActionListener {
-            val subdomain = Subdomain(jTextFieldSubdomain.text.toLowerCase(), jCheckBoxEnableIPv4.isSelected, jCheckBoxEnableIPv6.isSelected, jTextFieldToken.text)
+            val subdomain = Subdomain(
+                jTextFieldSubdomain.text.toLowerCase(),
+                jCheckBoxEnableIPv4.isSelected,
+                jCheckBoxEnableIPv6.isSelected,
+                jTextFieldToken.text
+            )
             update(oldSubdomain, subdomain)
             jFrame.dispatchEvent(WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING))
             subdomainMenu.refreshTableSubdomains()

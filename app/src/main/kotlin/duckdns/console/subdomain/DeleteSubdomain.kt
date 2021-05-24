@@ -10,13 +10,15 @@ import duckdns.model.Subdomain
 import java.text.MessageFormat
 
 private val headerTitleMainDeletionMenu = resourceBundle.getString("subdomain.deletion.menu").capitalize()
-private val headerTitleDeletionByPositionMenu = resourceBundle.getString("subdomain.deletion.by.position.menu").capitalize()
+private val headerTitleDeletionByPositionMenu =
+    resourceBundle.getString("subdomain.deletion.by.position.menu").capitalize()
 private val headerTitleDeletionByNameMenu = resourceBundle.getString("subdomain.deletion.by.name").capitalize()
 private val headerTitleSubdomainDeleteAllMenu = resourceBundle.getString("subdomain.delete.all.menu").capitalize()
 private val optionsSubtitle = "${resourceBundle.getString("options").capitalize()}:"
 private val exitOption = "0 - ${resourceBundle.getString("exit").capitalize()}"
 private val listSubdomainsOption = "1 - ${resourceBundle.getString("list.subdomains").capitalize()}"
-private val deleteSubdomainByPositionOption = "2 - ${resourceBundle.getString("delete.subdomain.by.position").capitalize()}"
+private val deleteSubdomainByPositionOption =
+    "2 - ${resourceBundle.getString("delete.subdomain.by.position").capitalize()}"
 private val deleteSubdomainByNameOption = "3 - ${resourceBundle.getString("delete.subdomain.by.name").capitalize()}"
 private val deleteAllSubdomainsOption = "4 - ${resourceBundle.getString("delete.all.subdomains").capitalize()}"
 private val exitingMessage = "${resourceBundle.getString("exiting").capitalize()}..."

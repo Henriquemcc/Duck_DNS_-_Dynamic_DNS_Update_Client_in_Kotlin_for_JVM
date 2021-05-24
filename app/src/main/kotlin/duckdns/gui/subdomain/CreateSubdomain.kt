@@ -103,7 +103,12 @@ class CreateSubdomain(private val subdomainMenu: SubdomainMenu) {
         val jButtonAddSubdomain = JButton(resourceBundle.getString("add.a.subdomain").capitalize())
         jButtonAddSubdomain.font = defaultFont
         jButtonAddSubdomain.addActionListener {
-            val subdomain = Subdomain(jTextFieldSubdomain.text.toLowerCase(), jCheckBoxEnableIPv4.isSelected, jCheckBoxEnableIPv6.isSelected, jTextFieldToken.text)
+            val subdomain = Subdomain(
+                jTextFieldSubdomain.text.toLowerCase(),
+                jCheckBoxEnableIPv4.isSelected,
+                jCheckBoxEnableIPv6.isSelected,
+                jTextFieldToken.text
+            )
             create(subdomain)
             jFrame.dispatchEvent(WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING))
             subdomainMenu.refreshTableSubdomains()
