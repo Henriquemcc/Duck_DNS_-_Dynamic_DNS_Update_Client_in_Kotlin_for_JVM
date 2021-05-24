@@ -1,12 +1,12 @@
 package duckdns.gui
 
+import duckdns.controller.cleanIPAddresses
 import duckdns.controller.updateIPAddress
 import duckdns.gui.subdomain.SubdomainMenu
 import duckdns.international.resourceBundle
 import java.awt.GridLayout
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
-import java.text.MessageFormat
 import javax.swing.JButton
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -34,23 +34,19 @@ class MainMenu {
     }
 
     /**
-     * Initializes buttonRunDuckDNSIPAddressUpdater.
+     * Initializes button updateSubdomainsIPAddressesOnce.
      * @return A JButton object initialized.
      */
-    private fun buttonRunDuckDNSIPAddressUpdaterOnceInit(): JButton {
-        val buttonRunDuckDNSIPAddressUpdaterOnce = JButton(
-            MessageFormat.format(
-                resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.just.one.time").capitalize(),
-                resourceBundle.getString("duck.dns.ip.address.updater")
-            )
-        )
-        buttonRunDuckDNSIPAddressUpdaterOnce.font = defaultFont
-        buttonRunDuckDNSIPAddressUpdaterOnce.addActionListener {
+    private fun buttonUpdateSubdomainsIPAddressesOnceInit(): JButton {
+        val buttonUpdateSubdomainsIPAddressesOnce =
+            JButton(resourceBundle.getString("update.subdomain.s.IP.addresses").capitalize())
+        buttonUpdateSubdomainsIPAddressesOnce.font = defaultFont
+        buttonUpdateSubdomainsIPAddressesOnce.addActionListener {
             jFrame.isVisible = false
             updateIPAddress()
             jFrame.isVisible = true
         }
-        return buttonRunDuckDNSIPAddressUpdaterOnce
+        return buttonUpdateSubdomainsIPAddressesOnce
     }
 
     /**
@@ -88,31 +84,41 @@ class MainMenu {
      * @return A JPanel object with it's subcomponents initialized.
      */
     private fun jPanelInit(): JPanel {
-        val jPanel = JPanel(GridLayout(3, 1))
+        val jPanel = JPanel(GridLayout(4, 1))
         jPanel.font = defaultFont
-        val buttonRunDuckDNSIPAddressUpdaterOnce = buttonRunDuckDNSIPAddressUpdaterOnceInit()
+        val buttonRunDuckDNSIPAddressUpdaterOnce = buttonUpdateSubdomainsIPAddressesOnceInit()
         jPanel.add(buttonRunDuckDNSIPAddressUpdaterOnce)
-        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = buttonRunDuckDNSIPAddressUpdaterInInfiniteLoopInit()
+        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = buttonUpdateSubdomainsIPAddressesInLoopingInit()
         jPanel.add(buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop)
         val buttonSubdomainMenu = buttonSubdomainMenuInit()
         jPanel.add(buttonSubdomainMenu)
+        val buttonCleanSubdomainsIPAddresses = buttonCleanSubdomainsIPAddressesInit()
+        jPanel.add(buttonCleanSubdomainsIPAddresses)
         return jPanel
 
     }
 
-    private fun buttonRunDuckDNSIPAddressUpdaterInInfiniteLoopInit(): JButton {
-        val buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop = JButton(
-            MessageFormat.format(
-                resourceBundle.getString("run.Duck.DNS.IP.Address.Updater.in.infinite.loop").capitalize(),
-                resourceBundle.getString("duck.dns.ip.address.updater")
-            )
-        )
-        buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop.font = defaultFont
-        buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop.addActionListener {
+    private fun buttonUpdateSubdomainsIPAddressesInLoopingInit(): JButton {
+        val buttonUpdateSubdomainsIPAddressesInLooping =
+            JButton(resourceBundle.getString("update.subdomain.s.IP.addresses.in.infinite.looping").capitalize())
+        buttonUpdateSubdomainsIPAddressesInLooping.font = defaultFont
+        buttonUpdateSubdomainsIPAddressesInLooping.addActionListener {
             jFrame.isVisible = false
             updateIPAddress(true)
         }
-        return buttonRunDuckDNSIPAddressUpdaterInInfiniteLoop
+        return buttonUpdateSubdomainsIPAddressesInLooping
+    }
+
+    private fun buttonCleanSubdomainsIPAddressesInit(): JButton {
+        val buttonCleanSubdomainsIPAddresses =
+            JButton(resourceBundle.getString("clean.subdomain.s.IP.addresses").capitalize())
+        buttonCleanSubdomainsIPAddresses.font = defaultFont
+        buttonCleanSubdomainsIPAddresses.addActionListener {
+            jFrame.isVisible = false
+            cleanIPAddresses()
+            jFrame.isVisible = true
+        }
+        return buttonCleanSubdomainsIPAddresses
     }
 
     /**
