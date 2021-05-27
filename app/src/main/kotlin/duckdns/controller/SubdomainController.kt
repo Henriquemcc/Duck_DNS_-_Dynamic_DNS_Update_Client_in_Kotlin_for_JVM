@@ -54,6 +54,14 @@ fun updateIPAddress(infiniteLoop: Boolean = false, delayedTime: Long = TimeUnit.
 }
 
 /**
+ * Clear Duck DNS IP Addresses for all Duck DNS Subdomains objects on array list subdomains.
+ */
+fun cleanIPAddresses() {
+    for (subdomain in subdomains)
+        subdomain.cleanIPAddresses()
+}
+
+/**
  * Loads Duck DNS subdomains array list from configuration file.
  */
 private fun load() {

@@ -49,7 +49,7 @@ data class Subdomain(
 
         for (i in 0..5)
             try {
-                clearIPAddresses()
+                cleanIPAddresses()
                 break
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -115,7 +115,7 @@ data class Subdomain(
     /**
      * Clears Duck DNS Subdomain IP addresses.
      */
-    private fun clearIPAddresses() {
+    fun cleanIPAddresses() {
         val clearUrl =
             "https://www.duckdns.org/update?domains=$subdomainName&token=$token&clear=true"
         val url = URL(clearUrl)

@@ -2,6 +2,7 @@ package duckdns
 
 import duckdns.console.console
 import duckdns.console.helpMenu
+import duckdns.controller.cleanIPAddresses
 import duckdns.controller.finalize
 import duckdns.controller.initialize
 import duckdns.controller.updateIPAddress
@@ -16,20 +17,31 @@ import java.awt.GraphicsEnvironment
 fun main(args: Array<String>) {
     initialize()
 
-    if (args.isNotEmpty() && args.contains("--console")) {
-        runConsole()
-    } else if (args.isNotEmpty() && args.contains("--gui")) {
-        runGUI()
-    } else if (args.isNotEmpty() && args.contains("--run-once")) {
-        updateIPAddress()
-    } else if (args.isNotEmpty() && args.any { it.contains("--infinite-loop") }) {
-        runDuckDNSIPUpdaterInfiniteLoop(args)
-    } else if (args.isNotEmpty() && args.contains("--help")) {
-        helpMenu()
-    } else if (!GraphicsEnvironment.isHeadless()) {
-        runGUI()
-    } else {
-        helpMenu()
+    when {
+        args.isNotEmpty() && args.contains("--console") -> {
+            runConsole()
+        }
+        args.isNotEmpty() && args.contains("--gui") -> {
+            runGUI()
+        }
+        args.isNotEmpty() && args.contains("--run-once") -> {
+            updateIPAddress()
+        }
+        args.isNotEmpty() && args.any { it.contains("--infinite-loop") } -> {
+            runDuckDNSIPUpdaterInfiniteLoop(args)
+        }
+        args.isNotEmpty() && args.contains("--clean") -> {
+            cleanIPAddresses()
+        }
+        args.isNotEmpty() && args.contains("--help") -> {
+            helpMenu()
+        }
+        !GraphicsEnvironment.isHeadless() -> {
+            runGUI()
+        }
+        else -> {
+            helpMenu()
+        }
     }
 }
 

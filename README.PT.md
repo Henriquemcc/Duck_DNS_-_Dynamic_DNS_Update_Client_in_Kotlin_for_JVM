@@ -4,7 +4,8 @@
 
 [![](https://www.duckdns.org/img/ducky_icon.png)](https://www.duckdns.org)
 
-Este programa atualiza os endereços IP (IPv4 e IPv6) dos subdomínios do [Duck DNS](https://www.duckdns.org), que é um serviço de DNS dinâmico gratuito.
+Este programa atualiza os endereços IP (IPv4 e IPv6) dos subdomínios do [Duck DNS](https://www.duckdns.org), que é um
+serviço de DNS dinâmico gratuito.
 
 ## Licença
 

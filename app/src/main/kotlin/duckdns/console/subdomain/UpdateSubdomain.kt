@@ -136,7 +136,10 @@ private fun update(oldSubdomain: Subdomain) {
                 println(savingAndExitingMessage)
 
 
-                duckdns.controller.update(oldSubdomain, Subdomain(newSubdomainName, newSubdomainEnableIPv4, newSubdomainEnableIPv6, newSubdomainToken))
+                duckdns.controller.update(
+                    oldSubdomain,
+                    Subdomain(newSubdomainName, newSubdomainEnableIPv4, newSubdomainEnableIPv6, newSubdomainToken)
+                )
 
             }
             2 -> newSubdomainName = readString(subdomainNameMessage).toLowerCase()
