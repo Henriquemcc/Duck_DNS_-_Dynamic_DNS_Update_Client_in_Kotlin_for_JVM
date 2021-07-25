@@ -1,6 +1,6 @@
 [Versão em Português](README.PT.md)
 
-# DuckDNS subdomain IP Address Updater in Kotlin/JVM
+# Duck DNS - Dynamic DNS Update Client in Kotlin for JVM
 
 [![](https://www.duckdns.org/img/ducky_icon.png)](https://www.duckdns.org)
 
